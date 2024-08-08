@@ -1,5 +1,8 @@
 # MRCP Module For FreeSWITCH
 
+## fork
+fix process MRCP_REQUEST_STATE_COMPLETE.
+
 ## How to build
 
 1. Build FreeSWITCH and its dependencies

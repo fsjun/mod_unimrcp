@@ -3700,7 +3700,11 @@ static apt_bool_t recog_on_message_receive(mrcp_application_t *application, mrcp
 				recog_channel_set_results(schannel, completion_cause);
 				switch_safe_free(completion_cause);
 			}
-			speech_channel_set_state(schannel, SPEECH_CHANNEL_READY);
+			if (message->start_line.request_state == MRCP_REQUEST_STATE_COMPLETE) {
+				speech_channel_set_state(schannel, SPEECH_CHANNEL_READY);
+			} else {
+				speech_channel_set_state(schannel, SPEECH_CHANNEL_PROCESSING);
+			}
 		} else if (message->start_line.method_id == RECOGNIZER_START_OF_INPUT) {
 			switch_log_printf(SWITCH_CHANNEL_UUID_LOG(schannel->session_uuid), SWITCH_LOG_DEBUG, "(%s) START OF INPUT\n", schannel->name);
 			recog_channel_set_start_of_input(schannel);
